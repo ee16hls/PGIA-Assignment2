@@ -9,10 +9,12 @@ Created on Thu Jan  3 12:05:06 2019
 """
 Imports
 """ 
+import tkinter
 import matplotlib
 import matplotlib.pyplot
 matplotlib.use('TkAgg')
 matplotlib.use('macosx')
+import matplotlib.animation
 import csv
 import Drunk_AgentFramework
 
@@ -76,8 +78,8 @@ Locates the pubs within the environment data and assigns them a value of 1.
 for y, row in enumerate(environment):
     for x, value in enumerate (row):
         if value == 1:
-            xstartpoint = x
-            ystartpoint = y
+            x_startpoint = x
+            y_startpoint = y
             
 
 """
@@ -85,7 +87,7 @@ Gives each agent a housenumber and assigns agents with a starting location at on
 """
 for j in range(num_of_agents):
     housenumber = (j+1)*10
-    agents.append(Drunk_AgentFramework.Agent(environment, agents, housenumber, xstartpoint, ystartpoint))
+    agents.append(Drunk_AgentFramework.Agent(environment, agents, housenumber, x_startpoint, y_startpoint))
     
 
 
@@ -94,7 +96,7 @@ for j in range(num_of_agents):
 
 for i in range (num_of_agents):
     while agents[i].got_home==False:
-        agents[i].nav()
+        agents[i].move()
         walked_through_env[agents[i]._y][agents[i]._x]+=1
         # For agents that made it home, set their arrival status to True to stop the code from rerunning those agents, and tell them to drunkely announce their arrival
         if agents[i].environment[agents[i]._y][agents[i]._x]==agents[i].housenumber: # If the agent's location is the same as their house number
@@ -170,3 +172,53 @@ matplotlib.pyplot.ylim=len(environment)
 matplotlib.pyplot.imshow(walked_environment_output)
 matplotlib.pyplot.show()
 
+
+"""
+Defines the gen_function for the animation
+"""
+
+def gen_function(b = [0]):
+    a = 0
+    global carry_on
+    while (a < 100) & (carry_on) :
+        yield a 
+        a = a + 1 
+
+
+"""
+Creates the GUI window for the model to run in
+
+"""
+root = tkinter.Tk()
+root.wm_title("Model")
+
+# animation = matplotlib.animation.FuncAnimation(fig, update, interval=1, repeat=False, frames=num_of_iterations)
+# animation = matplotlib.animation.FuncAnimation(fig, update, frames=gen_function, repeat=False)
+# matplotlib.pyplot.show()
+  
+
+"""
+Defines the 'run' function in the model to begin animation 
+"""   
+
+def run():
+    global animation 
+    animation = matplotlib.animation.FuncAnimation(fig, frames=gen_function, repeat=False)
+    canvas.show()
+
+canvas = matplotlib.backends.backend_tkagg.FigureCanvasTkAgg(fig, master=root)
+canvas._tkcanvas.pack(side=tkinter.TOP, fill=tkinter.BOTH, expand=1)
+
+
+
+"""
+Adds a menu bar and 'run' button for users to start the model run
+"""
+
+menu_bar = tkinter.Menu(root)
+root.config(menu=menu_bar)
+model_menu = tkinter.Menu(menu_bar)
+menu_bar.add_cascade(label="Model", menu=model_menu)
+model_menu.add_command(label="Run model", command=run)
+
+tkinter.mainloop() #Waits for interactions.

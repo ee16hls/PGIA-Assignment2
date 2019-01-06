@@ -17,7 +17,7 @@ Create the Agent class and define their characteristics
 """
 class Agent ():
     
-    def __init__(self, environment, agents, housenumber, xstartpoint, ystartpoint):
+    def __init__(self, environment, agents, housenumber, x_startpoint, y_startpoint):
         
         """
         Constructing the Agent class; assigning class variables
@@ -32,13 +32,13 @@ class Agent ():
         self.environment = environment
         self.agents = agents
         self.housenumber = housenumber
-        self._x = xstartpoint
-        self._y = ystartpoint
+        self._x = x_startpoint
+        self._y = y_startpoint
         self.got_home = False
         
         
         
-    def nav (self):
+    def move (self):
         
         """
         Defining the nav function; allowing drunk agents to navigate the environment
@@ -47,23 +47,23 @@ class Agent ():
         """
         
         if random.random() <0.5:
-            xnav=self._x+1
-            if xnav<len(self.environment) and xnav>0:
-                self._x = xnav
+            xmove=self._x+1
+            if xmove<len(self.environment) and xmove>0:
+                self._x = xmove
                 #self.numofsteps +=1
         else:
-            xnav=self._x-1
-            if xnav<len(self.environment) and xnav>0:
-                self._x = xnav
+            xmove=self._x-1
+            if xmove<len(self.environment) and xmove>0:
+                self._x = xmove
                 #self.numofsteps +=1            
                 
         if random.random() <0.5:
-            ynav=self._y+1
-            if ynav<len(self.environment) and ynav>0:
-                self._y = ynav
+            ymove=self._y+1
+            if ymove<len(self.environment) and ymove>0:
+                self._y = ymove
                 #self.numofsteps +=1
         else:
-            ynav=self._y-1
-            if ynav<len(self.environment) and ynav>0:
-                self._y = ynav
+            ymove=self._y-1
+            if ymove<len(self.environment) and ymove>0:
+                self._y = ymove
                 #self.numofsteps +=1
