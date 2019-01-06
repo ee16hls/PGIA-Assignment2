@@ -2,8 +2,18 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Jan  3 12:06:32 2019
-
+Programming for Geographical Information Analysis: Core Skills 2018
+Model Agent Framework- Assignment 2- Planning for Drunks
 @author: hannahsherwood
+"""
+"""
+This code creates the agents Class to be used in the agent-based model.
+Here the agents have their 'behaviours' defined for them to interact within a
+set environment. The 'drunk' agents are assigned a starting location at a 'pub' 
+and a housenumber which corresponds to a location number on the towns map. The 
+agents are set to move randomly from the pub (start location) until they reach 
+home.
+
 """
 
 """
@@ -13,21 +23,14 @@ import random
 
 
 """
-Create the Agent class and define their characteristics
+Create the Agent class and define their characteristics. Agents are placed in 
+their environment, made to be self-aware and aware of each other, assigned a
+housenumber, agent is set in a starting x and y location of a pub, and agents 
+are told not to start the model run at their homes. 
 """
 class Agent ():
     
     def __init__(self, environment, agents, housenumber, x_startpoint, y_startpoint):
-        
-        """
-        Constructing the Agent class; assigning class variables
-        1. Place agents in the environment
-        2. Make agents self-aware and of others
-        3. Assign each agent a house number
-        4. Set agent starting x coordinate to start the at the pub location
-        5. Set agent starting y coordinate to start the at the pub location
-        6. Add variable to set agent not at home at the start of the model        
-        """
         
         self.environment = environment
         self.agents = agents
@@ -35,35 +38,34 @@ class Agent ():
         self._x = x_startpoint
         self._y = y_startpoint
         self.got_home = False
-        
-        
+
+   
+    """
+    Defines the move function. This function allows the drunk agents to move around 
+    the environment randomly but they are set a limit where the boundaries of the
+    environment exist. 
+    """
         
     def move (self):
-        
-        """
-        Defining the nav function; allowing drunk agents to navigate the environment
-        1. They are limited to walk between the environment edges; thus no torus is implemented
-        2. Each agent takes a step in a random direction
-        """
         
         if random.random() <0.5:
             xmove=self._x+1
             if xmove<len(self.environment) and xmove>0:
                 self._x = xmove
-                #self.numofsteps +=1
+              
         else:
             xmove=self._x-1
             if xmove<len(self.environment) and xmove>0:
                 self._x = xmove
-                #self.numofsteps +=1            
+                        
                 
         if random.random() <0.5:
             ymove=self._y+1
             if ymove<len(self.environment) and ymove>0:
                 self._y = ymove
-                #self.numofsteps +=1
+                
         else:
             ymove=self._y-1
             if ymove<len(self.environment) and ymove>0:
                 self._y = ymove
-                #self.numofsteps +=1
+                

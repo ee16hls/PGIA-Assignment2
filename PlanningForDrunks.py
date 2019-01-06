@@ -2,8 +2,10 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Jan  3 12:05:06 2019
-
+Programming for Geographical Information Analysis: Core Skills 2018
+Model run script- Assignment 2- Planning for Drunks
 @author: hannahsherwood
+
 """
 
 """
@@ -91,20 +93,22 @@ for j in range(num_of_agents):
     
 
 
-# For agents that aren't home, continue moving and store 1 into the stepped_environment file
-
+"""
+Gets agents to move through the environment and get home. The 'if' function is for agents that make it home
+as they fulfill the TRUE statement and the code can stop running as their location is the same as their assigned housenumber.
+"""
 
 for i in range (num_of_agents):
     while agents[i].got_home==False:
         agents[i].move()
         walked_through_env[agents[i]._y][agents[i]._x]+=1
-        # For agents that made it home, set their arrival status to True to stop the code from rerunning those agents, and tell them to drunkely announce their arrival
-        if agents[i].environment[agents[i]._y][agents[i]._x]==agents[i].housenumber: # If the agent's location is the same as their house number
+        if agents[i].environment[agents[i]._y][agents[i]._x]==agents[i].housenumber: 
             agents[i].got_home=True
            
 
-
-# Create a graph to demonstrate the agents that arrived at their house (all of them by this point due to above code)
+"""
+Creates the figure showing drunk agents in their homes after their journey from the pub.
+"""
 	
 fig.canvas.set_window_title('Drunk agents having arrived back home')
 matplotlib.pyplot.xlim=len(environment)
@@ -115,10 +119,9 @@ for i in range (num_of_agents):
 matplotlib.pyplot.show()
 
 
-
-
-# Write stored values from the stepped_environment list to be able to create a density map
-
+"""
+Writes the stored values from the walked_through_environment list to a csv file to build the density map
+"""
 
 f2= open ('walked_enviroment_output.csv', 'w', newline= '')
 writer = csv.writer (f2, delimiter = ',')
@@ -191,11 +194,7 @@ Creates the GUI window for the model to run in
 """
 root = tkinter.Tk()
 root.wm_title("Model")
-
-# animation = matplotlib.animation.FuncAnimation(fig, update, interval=1, repeat=False, frames=num_of_iterations)
-# animation = matplotlib.animation.FuncAnimation(fig, update, frames=gen_function, repeat=False)
-# matplotlib.pyplot.show()
-  
+ 
 
 """
 Defines the 'run' function in the model to begin animation 
