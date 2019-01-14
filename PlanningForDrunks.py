@@ -6,6 +6,11 @@ Programming for Geographical Information Analysis: Core Skills 2018
 Model run script- Assignment 2- Planning for Drunks
 @author: hannahsherwood
 
+This code when run, starts an agent based model which is created here to model the movement of drunk agents passing through 
+their environment from the pub to their homes. Once home, the code will produce two windows, one showing the final 
+environment map with the drunk agents all back in their homes after their journey. The second window is a density map 
+showing the amount of times each cell on the map has been walked over by the drunk agents tryig to find their way home. 
+An output file is also created and saved as a csv file format containing the walked in environment density data. 
 """
 
 """
