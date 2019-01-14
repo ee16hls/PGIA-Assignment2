@@ -9,7 +9,7 @@ The model:
 - Calculates where in the town the pubs and homes are located. 
 - Models the drunk agents leaving the pub they start in and reaching their homes by simulating them to move across the       environment randomly until they get home.
 - Once all the drunk agents are home the model stores how many drunks have passed through each point on the map.
-- Creates a density map showing the drunk agents passing through each point on a map.
+- Creates a density map showing the density of drunk agents that have passed through each cell in the environment map.
 - Saves the density map to the file 'walked_environment_output.csv'.
 - When the model has finished running a window appears with a figure showing the drunk agents in their homes. 
 
